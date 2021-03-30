@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.AddEquipmentActivity">
+    tools:context=".activities.AddEquipmentActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -37,128 +37,179 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar">
+        android:layout_margin="16dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <LinearLayout
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/equipmentNameTIL"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:hint="Equipment Name"
+            app:endIconMode="dropdown_menu"
+            app:errorEnabled="true">
 
-            <TextView
-                android:id="@+id/demo1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="List of Equipment:"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/black" />
-
-            <CheckBox
-                android:id="@+id/checkBox1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="Laptop"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <CheckBox
-                android:id="@+id/checkBox2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="PC"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-
-            <CheckBox
-                android:id="@+id/checkBox3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="Monitor"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <CheckBox
-                android:id="@+id/checkBox4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="KeyBoard"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-
-            <CheckBox
-                android:id="@+id/checkBox5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="Mouse"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <CheckBox
-                android:id="@+id/checkBox6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="Dairy"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-
-            <CheckBox
-                android:id="@+id/checkBox7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="Printer"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <CheckBox
-                android:id="@+id/checkBox8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="Sever"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <CheckBox
-                android:id="@+id/checkBox9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="Photocopy machine"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <CheckBox
-                android:id="@+id/checkBox10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="Others"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <EditText
-                android:id="@+id/otherEquipment"
+            <AutoCompleteTextView
+                android:id="@+id/equipmentName_auto_complete_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:hint="Enter your specific equipment"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/black"
-                android:visibility="gone" />
+                android:inputType="none"
+                android:padding="8dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/equipmentItemCountTIL"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Item Count"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true">
 
-            <Button
-                android:id="@+id/btnAdd"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/equipment_item_count_text_input_et"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Add"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                android:inputType="number"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        </LinearLayout>
-    </ScrollView>
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/saveEquipmentBtn"
+            android:layout_gravity="center_horizontal"
+            android:text="Save"
+            />
+    </LinearLayout>
 
-</RelativeLayout>
+    <!-- <ScrollView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/toolbar">
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="vertical">
+
+             <TextView
+                 android:id="@+id/demo1"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="8dp"
+                 android:text="List of Equipment:"
+                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                 android:textColor="@color/black" />
+
+             <CheckBox
+                 android:id="@+id/checkBox1"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="8dp"
+                 android:text="Laptop"
+                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+             <CheckBox
+                 android:id="@+id/checkBox2"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="8dp"
+                 android:text="PC"
+                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+
+             <CheckBox
+                 android:id="@+id/checkBox3"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="8dp"
+                 android:text="Monitor"
+                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+             <CheckBox
+                 android:id="@+id/checkBox4"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="8dp"
+                 android:text="KeyBoard"
+                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+
+             <CheckBox
+                 android:id="@+id/checkBox5"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="8dp"
+                 android:text="Mouse"
+                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+             <CheckBox
+                 android:id="@+id/checkBox6"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="8dp"
+                 android:text="Dairy"
+                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+
+             <CheckBox
+                 android:id="@+id/checkBox7"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="8dp"
+                 android:text="Printer"
+                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+             <CheckBox
+                 android:id="@+id/checkBox8"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="8dp"
+                 android:text="Sever"
+                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+             <CheckBox
+                 android:id="@+id/checkBox9"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="8dp"
+                 android:text="Photocopy machine"
+                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+             <CheckBox
+                 android:id="@+id/checkBox10"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="8dp"
+                 android:text="Others"
+                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+             <EditText
+                 android:id="@+id/otherEquipment"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="8dp"
+                 android:hint="Enter your specific equipment"
+                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                 android:textColor="@color/black"
+                 android:visibility="gone" />
+
+
+             <Button
+                 android:id="@+id/btnAdd"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center"
+                 android:text="Add"
+                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+         </LinearLayout>
+     </ScrollView>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

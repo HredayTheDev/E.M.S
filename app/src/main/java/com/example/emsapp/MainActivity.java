@@ -10,11 +10,9 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.emsapp.Activity.AddEmployeeActivity;
-import com.example.emsapp.Activity.AdminControllerActivity;
-import com.example.emsapp.Activity.UserSignInActivity;
-import com.example.emsapp.Adapter.UserRoleAdapter;
-import com.example.emsapp.Model.UserRole;
+import com.example.emsapp.activities.UserSignInActivity;
+import com.example.emsapp.adapters.UserRoleAdapter;
+import com.example.emsapp.models.UserRole;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;

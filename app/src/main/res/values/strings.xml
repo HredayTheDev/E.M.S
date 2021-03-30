@@ -5,4 +5,17 @@
     <string name="inTime_message">Thank you for Coming in Time!  ✅ <br/> Please give us gratings😊</string>
     <string name="late_reason">Attended in Time 😊</string>
     <string name="gratings_hint">Give us gratings 😊</string>
+
+    <string-array name="equipmentList">
+        <item>Laptop</item>
+        <item>PC</item>
+        <item>Monitor</item>
+        <item>Mouse</item>
+        <item>Keyboard</item>
+        <item>Dairy</item>
+        <item>Printer</item>
+        <item>Server</item>
+        <item>Photocopy Machine</item>
+        <item>Others</item>
+    </string-array>
 </resources>

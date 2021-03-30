@@ -17,37 +17,37 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".Activity.SplashScreenActivity">
+        <activity android:name=".activities.SplashScreenActivity">
             <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
-        <activity android:name=".Activity.ExecutionReportDetailsActivity" />
-        <activity android:name=".Activity.ExecutionReportHistoryActivity" />
-        <activity android:name=".Activity.ExecutiveReportActivity" />
-        <activity android:name=".Activity.CheckUserMovementHistoryActivity" />
-        <activity android:name=".Activity.CheckUserAttendanceHistoryActivity" />
-        <activity android:name=".Activity.MovementHistoryActivity" />
-        <activity android:name=".Activity.AttendanceHistoryActivity" />
-        <activity android:name=".Activity.CheckEquipmentActivity" />
-        <activity android:name=".Activity.AddEquipmentActivity" />
-        <activity android:name=".Activity.UserMovementListActivity" />
-        <activity android:name=".Activity.UserAttendanceListActivity" />
-        <activity android:name=".Activity.CheckMovableEventsActivity" />
-        <activity android:name=".Activity.SelfMovableDetailsActivity" />
-        <activity android:name=".Activity.SelfAttendanceDetailsActivity" />
-        <activity android:name=".Activity.CheckAttendanceActivity" />
-        <activity android:name=".Activity.MovableReportActivity" />
-        <activity android:name=".Activity.UpdateUserInfoActivity" />
-        <activity android:name=".Activity.OfficeInAndOutActivity" />
-        <activity android:name=".Activity.UserDetailsActivity" />
-        <activity android:name=".Activity.UserHomePageActivity" />
-        <activity android:name=".Activity.EmployeeDetailsActivity" />
-        <activity android:name=".Activity.AddEmployeeActivity" />
-        <activity android:name=".Activity.AdminControllerActivity" />
-        <activity android:name=".Activity.UserSignInActivity" />
+        <activity android:name=".activities.ExecutionReportDetailsActivity" />
+        <activity android:name=".activities.ExecutionReportHistoryActivity" />
+        <activity android:name=".activities.ExecutiveReportActivity" />
+        <activity android:name=".activities.CheckUserMovementHistoryActivity" />
+        <activity android:name=".activities.CheckUserAttendanceHistoryActivity" />
+        <activity android:name=".activities.MovementHistoryActivity" />
+        <activity android:name=".activities.AttendanceHistoryActivity" />
+        <activity android:name=".activities.CheckEquipmentActivity" />
+        <activity android:name=".activities.AddEquipmentActivity" />
+        <activity android:name=".activities.UserMovementListActivity" />
+        <activity android:name=".activities.UserAttendanceListActivity" />
+        <activity android:name=".activities.CheckMovableEventsActivity" />
+        <activity android:name=".activities.SelfMovableDetailsActivity" />
+        <activity android:name=".activities.SelfAttendanceDetailsActivity" />
+        <activity android:name=".activities.CheckAttendanceActivity" />
+        <activity android:name=".activities.MovableReportActivity" />
+        <activity android:name=".activities.UpdateUserInfoActivity" />
+        <activity android:name=".activities.OfficeInAndOutActivity" />
+        <activity android:name=".activities.UserDetailsActivity" />
+        <activity android:name=".activities.UserHomePageActivity" />
+        <activity android:name=".activities.EmployeeDetailsActivity" />
+        <activity android:name=".activities.AddEmployeeActivity" />
+        <activity android:name=".activities.AdminControllerActivity" />
+        <activity android:name=".activities.UserSignInActivity" />
         <activity android:name=".MainActivity"></activity>
     </application>
 
