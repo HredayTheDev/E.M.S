@@ -10,6 +10,7 @@ import com.example.emsapp.MainActivity
 import com.example.emsapp.R
 import com.example.emsapp.models.Employee
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -127,7 +128,7 @@ class SignUpActivity : AppCompatActivity() {
                         Log.d(TAG, "DB: started")
                         Toast.makeText(this@SignUpActivity, "Successful", Toast.LENGTH_SHORT).show()
 
-                        val intent = Intent(this@SignUpActivity, MainActivity::class.java)
+                        val intent = Intent(this@SignUpActivity, UserHomePageActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         startActivity(intent)
 
@@ -139,7 +140,10 @@ class SignUpActivity : AppCompatActivity() {
                     }
                 }
 
+            } else {
+                Toast.makeText(this@SignUpActivity, task.exception?.localizedMessage.toString(), Toast.LENGTH_SHORT).show()
             }
+
         }
 
     }

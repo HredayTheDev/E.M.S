@@ -185,4 +185,9 @@ public class UserHomePageActivity extends AppCompatActivity {
         executionReport = findViewById(R.id.executionLayout);
         btnLogOut = findViewById(R.id.logOutBt);
     }
+
+    public void goToNotificationActivity(View view) {
+        Intent intent = new Intent(UserHomePageActivity.this, SendNotificationActivity.class);
+        startActivity(intent);
+    }
 }
