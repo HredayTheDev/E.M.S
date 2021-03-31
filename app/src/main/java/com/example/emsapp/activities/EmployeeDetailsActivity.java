@@ -67,7 +67,7 @@ public class EmployeeDetailsActivity extends AppCompatActivity {
         userDeleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userId = employee.geteId();
+                String userId = employee.getUserId();
                 databaseReference.child(userId).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

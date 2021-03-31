@@ -228,7 +228,7 @@ public class UpdateUserInfoActivity extends AppCompatActivity {
                                    final String upazilla, final String zilla, final String division, final String pgId,
                                    final String department, final String designation, final String joiningDate,
                                    final String password, final String userRole, final String userConcern) {
-        String userId = employee.geteId();
+        String userId = employee.getUserId();
 
         employeeReference = FirebaseDatabase.getInstance().getReference().child("Employee").child(department);
         Employee employee = new Employee(userId, name, email, phone, nIdNo, currentCity, currentLocation,

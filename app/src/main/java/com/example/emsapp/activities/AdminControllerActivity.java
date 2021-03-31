@@ -55,7 +55,7 @@ public class AdminControllerActivity extends AppCompatActivity {
         addEmployeeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminControllerActivity.this, AddEmployeeActivity.class);
+                Intent intent = new Intent(AdminControllerActivity.this, AddPgIdActivity.class);
                 startActivity(intent);
             }
         });

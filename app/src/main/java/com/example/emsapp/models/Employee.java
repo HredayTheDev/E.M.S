@@ -3,7 +3,7 @@ package com.example.emsapp.models;
 import java.io.Serializable;
 
 public class Employee implements Serializable {
-    private String eId;
+    private String userId;
     private String userName;
     private String userEmail;
     private String userPhone;
@@ -21,11 +21,20 @@ public class Employee implements Serializable {
     private String userPassword;
     private String userRole;
     private String userConcern;
+    private String notificationToken;
 
     public Employee() {
     }
 
-    public Employee(String eId,
+    public Employee(String userId, String userName, String userEmail, String userPgId, String notificationToken) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userEmail = userEmail;
+        this.userPgId = userPgId;
+        this.notificationToken = notificationToken;
+    }
+
+    public Employee(String userId,
                     String userName,
                     String userEmail,
                     String userPhone,
@@ -42,7 +51,7 @@ public class Employee implements Serializable {
                     String userJoiningDate,
                     String userRole,
                     String userConcern) {
-        this.eId = eId;
+        this.userId = userId;
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPhone = userPhone;
@@ -61,7 +70,7 @@ public class Employee implements Serializable {
         this.userConcern = userConcern;
     }
 
-    public Employee(String eId,
+    public Employee(String userId,
                     String userName,
                     String userEmail,
                     String userPhone,
@@ -79,7 +88,7 @@ public class Employee implements Serializable {
                     String userPassword,
                     String userRole,
                     String userConcern) {
-        this.eId = eId;
+        this.userId = userId;
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPhone = userPhone;
@@ -99,12 +108,12 @@ public class Employee implements Serializable {
         this.userConcern = userConcern;
     }
 
-    public String geteId() {
-        return eId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void seteId(String eId) {
-        this.eId = eId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {
@@ -242,10 +251,18 @@ public class Employee implements Serializable {
         this.userConcern = userConcern;
     }
 
+    public String getNotificationToken() {
+        return notificationToken;
+    }
+
+    public void setNotificationToken(String notificationToken) {
+        this.notificationToken = notificationToken;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
-                "eId='" + eId + '\'' +
+                "userId='" + userId + '\'' +
                 ", userName='" + userName + '\'' +
                 ", userEmail='" + userEmail + '\'' +
                 ", userPhone='" + userPhone + '\'' +
@@ -263,6 +280,7 @@ public class Employee implements Serializable {
                 ", userPassword='" + userPassword + '\'' +
                 ", userRole='" + userRole + '\'' +
                 ", userConcern='" + userConcern + '\'' +
+                ", notificationToken='" + notificationToken + '\'' +
                 '}';
     }
 }

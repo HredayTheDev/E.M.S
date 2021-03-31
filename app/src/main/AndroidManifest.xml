@@ -17,12 +17,15 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".activities.SendNotificationActivity"></activity>
+        <activity android:name=".activities.AddPgIdActivity" />
+        <activity android:name=".activities.SignUpActivity" />
         <activity android:name=".activities.SplashScreenActivity">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".activities.ExecutionReportDetailsActivity" />
         <activity android:name=".activities.ExecutionReportHistoryActivity" />
@@ -48,7 +51,16 @@
         <activity android:name=".activities.AddEmployeeActivity" />
         <activity android:name=".activities.AdminControllerActivity" />
         <activity android:name=".activities.UserSignInActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
+
+        <service
+            android:name=".FirebaseService"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

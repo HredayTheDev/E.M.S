@@ -1,9 +1,5 @@
 package com.example.emsapp.activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,10 +13,14 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.emsapp.R;
 import com.example.emsapp.adapters.UserRoleAdapter;
 import com.example.emsapp.models.Employee;
 import com.example.emsapp.models.UserRole;
-import com.example.emsapp.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -165,4 +165,7 @@ public class UserSignInActivity extends AppCompatActivity {
         });
     }
 
+    public void goToSignUpActivity(View view) {
+        startActivity(new Intent(this,SignUpActivity.class));
+    }
 }
