@@ -16,14 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:targetApi="m">
-        <activity android:name=".activities.SendNotificationActivity"></activity>
-        <activity android:name=".activities.AddPgIdActivity" />
+        >
+        <activity android:name=".activities.SendNotificationActivity"/>
         <activity android:name=".activities.SignUpActivity" />
         <activity android:name=".activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -51,6 +49,7 @@
         <activity android:name=".activities.AddEmployeeActivity" />
         <activity android:name=".activities.AdminControllerActivity" />
         <activity android:name=".activities.UserSignInActivity" />
+        <activity android:name=".activities.AddPgIdActivity" />
         <activity android:name=".MainActivity" />
 
         <service

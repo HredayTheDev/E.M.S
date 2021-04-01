@@ -2,6 +2,7 @@ package com.example.emsapp.activities
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.emsapp.R
@@ -94,8 +95,10 @@ class SendNotificationActivity : AppCompatActivity(), NotificationAdapter.OnItem
             val response = RetrofitInstance.api.postNotification(notification)
             if (response.isSuccessful) {
                 //Log.d(TAG, "Response: ${Gson().toJson(response)}")
+                Toast.makeText(this@SendNotificationActivity, "Send notification", Toast.LENGTH_SHORT).show();
             } else {
                // Log.e(TAG, response.errorBody().toString())
+                Toast.makeText(this@SendNotificationActivity, response.errorBody().toString(), Toast.LENGTH_SHORT).show();
             }
         } catch (e: Exception) {
             Log.e(TAG, e.toString())

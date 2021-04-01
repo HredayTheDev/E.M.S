@@ -1,72 +1,79 @@
-package com.example.emsapp.activities;
+package com.example.emsapp.activities
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
-import android.widget.Toast;
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+import android.util.Patterns
+import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.emsapp.R
+import com.example.emsapp.models.Employee
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.activity_sign_up.*
+import kotlinx.android.synthetic.main.activity_user_sign_in.*
+import kotlinx.android.synthetic.main.activity_user_sign_in.emailET
+import kotlinx.android.synthetic.main.activity_user_sign_in.passwordET
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.emsapp.R;
-import com.example.emsapp.adapters.UserRoleAdapter;
-import com.example.emsapp.models.Employee;
-import com.example.emsapp.models.UserRole;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+class UserSignInActivity : AppCompatActivity() {
 
-import java.util.ArrayList;
+    private lateinit var mAuth: FirebaseAuth
+    private lateinit var employee: Employee
+    private lateinit var firebaseUser: FirebaseUser;
+    private lateinit var userToken: String
+    private lateinit var pgId: String
+    private lateinit var userRole: String
+    private lateinit var email: String
+    private lateinit var password: String
 
-public class UserSignInActivity extends AppCompatActivity {
-    private EditText userNameEt, userPasswordEt;
-    private Button signInBt;
-    private ProgressBar progressBar;
-    private String userRole;
-    private Spinner userRoleSpinner;
-    private ArrayList<Employee> employeeInfoList = new ArrayList<>();
-    private DatabaseReference employeeReference;
-    private String uName, uPassword;
-    private ArrayList<UserRole> mUserRoleList;
-    private UserRoleAdapter mUserRoleAdapter;
-    public static final String TAG = "SignIn";
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_user_sign_in)
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_sign_in);
-        inItUserRoleList();
-        inItView();
+        mAuth = FirebaseAuth.getInstance()
 
-        clickEvents();
+        signInBtn.setOnClickListener {
+
+            progressbarId.visibility = View.VISIBLE
+
+            if (!validateEmail() or !validatePassword()) {
+                return@setOnClickListener
+            }
+
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    if (email == "admin@gmail.com") {
+                        progressbarId.visibility = View.GONE
+                        val intent = Intent(this@UserSignInActivity, AdminControllerActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        startActivity(intent)
+                        finish()
+
+                    } else {
+                        progressbarId.visibility = View.GONE
+                        val intent = Intent(this@UserSignInActivity, UserHomePageActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        startActivity(intent)
+                        finish()
+
+                    }
+
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "signInWithEmail:failure", task.exception)
+                    Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                    progressbarId.visibility = View.GONE
+
+                }
+            }
+
+        }
     }
 
-    //////User Role List for DropDownList/////
-    private void inItUserRoleList() {
-        mUserRoleList = new ArrayList<>();
-        mUserRoleList.add(new UserRole("Select User Role.."));
-        mUserRoleList.add(new UserRole("Admin"));
-        mUserRoleList.add(new UserRole("Managing Director"));
-        mUserRoleList.add(new UserRole("General Manager"));
-        mUserRoleList.add(new UserRole("Team Coordinator"));
-        mUserRoleList.add(new UserRole("Project Manager"));
-        mUserRoleList.add(new UserRole("General Employee"));
-        mUserRoleList.add(new UserRole("Accounts"));
-        mUserRoleList.add(new UserRole("Service"));
-        mUserRoleList.add(new UserRole("Support"));
-    }
-
+    /*
     private void clickEvents() {
 
         signInBt.setOnClickListener(new View.OnClickListener() {
@@ -167,5 +174,55 @@ public class UserSignInActivity extends AppCompatActivity {
 
     public void goToSignUpActivity(View view) {
         startActivity(new Intent(this,SignUpActivity.class));
+    }*/
+
+    companion object {
+        const val TAG = "SignIn"
     }
+
+
+
+/*
+    private fun validateUserRole(): Boolean {
+        userRole = userRoleDropdownTV.text.toString().trim()
+        return if (userRole.isEmpty()) {
+            userRoleSpinnerId.error = "Field can't be empty!"
+            false
+        } else {
+            userRoleSpinnerId.error = null
+            true
+        }
+    }*/
+
+
+    private fun validateEmail(): Boolean {
+        email = emailET.editText?.text.toString().trim()
+        return if (email.isEmpty()) {
+            emailET.error = "Field can't be empty!"
+            false
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailET.error = "Please enter a valid email address!"
+            false
+        } else {
+            emailET.error = null
+            true
+        }
+    }
+
+    private fun validatePassword(): Boolean {
+        password = passwordET.editText?.text.toString().trim()
+        return if (password.isEmpty()) {
+            passwordET.error = "Field can't be empty!"
+            false
+        } else {
+            passwordET.error = null
+            true
+        }
+    }
+
+    fun goToSignUpActivity(view: View) {
+        val intent = Intent(this@UserSignInActivity, SignUpActivity::class.java)
+        startActivity(intent)
+    }
+
 }

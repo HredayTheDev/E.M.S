@@ -99,6 +99,7 @@
                         android:layout_height="100dp"
                         android:layout_margin="8dp"
                         android:elevation="16dp"
+                        android:onClick="goToProfile"
                         app:cardCornerRadius="8dp">
 
                         <LinearLayout
