@@ -23,4 +23,19 @@
         <item>Photocopy Machine</item>
         <item>Others</item>
     </string-array>
+
+    <string-array name="userRoles">
+        <item>Admin</item>
+        <item>Managing Director</item>
+        <item>General Manager</item>
+        <item>Team Coordinator</item>
+        <item>Project Manager</item>
+        <item>General Employee</item>
+        <item>Accounts</item>
+        <item>Service</item>
+        <item>Support</item>
+
+    </string-array>
+
+
 </resources>

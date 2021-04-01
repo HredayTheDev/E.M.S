@@ -1,19 +1,19 @@
 package com.example.emsapp.activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.emsapp.models.Employee;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
 import com.example.emsapp.R;
+import com.example.emsapp.models.Employee;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class UserHomePageActivity extends AppCompatActivity {
 
-    private CardView profileInfo, checkInOut, movableReport,
+    private CardView profileInfo, checkInOut, movableReport,notificationLayout,
             movementEvents, attendance, addEquipment, executionReport;
     private TextView userOriginalName, btnLogOut;
     private String PgId, userRole;
@@ -44,9 +44,9 @@ public class UserHomePageActivity extends AppCompatActivity {
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                preferences = getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-                preferences.edit().putString("loginState",null).apply();
+                FirebaseAuth.getInstance().signOut();
                 Intent intent1 = new Intent(UserHomePageActivity.this, UserSignInActivity.class);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent1);
                 finish();
             }
@@ -67,7 +67,7 @@ public class UserHomePageActivity extends AppCompatActivity {
                     if(employeeInfo.getUserPgId().equals(PgId)){
                         userOriginalName.setText("Hello! "+ employeeInfo.getUserName());
                         userRole = employeeInfo.getUserRole();
-                        GoForDetails(employeeInfo);
+                       // GoForDetails(employeeInfo);
                         GoForCheckInOutInfo(employeeInfo,userRole);
                         //////Different userInterface process///////////
                         if(employeeInfo.getUserDepartment().equals("Executive") ||
@@ -157,8 +157,8 @@ public class UserHomePageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(UserHomePageActivity.this, CheckEquipmentActivity.class);
-                intent.putExtra("userInfo", employeeInfo);
-                intent.putExtra("userRole", userRole);
+               /* intent.putExtra("userInfo", employeeInfo);
+                intent.putExtra("userRole", userRole);*/
                 startActivity(intent);
             }
         });
@@ -169,6 +169,14 @@ public class UserHomePageActivity extends AppCompatActivity {
                 Intent intent = new Intent(UserHomePageActivity.this, ExecutiveReportActivity.class);
                 intent.putExtra("userInfo", employeeInfo);
                 intent.putExtra("userRole", userRole);
+                startActivity(intent);
+            }
+        });
+
+        notificationLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UserHomePageActivity.this, SendNotificationActivity.class);
                 startActivity(intent);
             }
         });
@@ -184,10 +192,18 @@ public class UserHomePageActivity extends AppCompatActivity {
         addEquipment = findViewById(R.id.equipmentsLayout);
         executionReport = findViewById(R.id.executionLayout);
         btnLogOut = findViewById(R.id.logOutBt);
+        notificationLayout = findViewById(R.id.notificationLayout);
     }
 
     public void goToNotificationActivity(View view) {
         Intent intent = new Intent(UserHomePageActivity.this, SendNotificationActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToProfile(View view) {
+
+        Intent intent = new Intent(UserHomePageActivity.this, UserDetailsActivity.class);
+       // intent.putExtra("userInfo", employeeInfo);
         startActivity(intent);
     }
 }

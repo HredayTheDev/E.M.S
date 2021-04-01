@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.emsapp.MainActivity
@@ -37,7 +38,7 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
 
         mAuth = FirebaseAuth.getInstance()
-        mAuth = FirebaseAuth.getInstance()
+
 
         val employeeRef = firebaseDatabase.getReference("user")
 
@@ -51,6 +52,7 @@ class SignUpActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            progressbar.visibility = View.VISIBLE
 
             //validatePgId()
 
@@ -69,15 +71,18 @@ class SignUpActivity : AppCompatActivity() {
                             }
                             else -> {
                                 Toast.makeText(this@SignUpActivity, "Please contact to admin", Toast.LENGTH_LONG).show()
+                                progressbar.visibility = View.GONE
                             }
                         }
                     } else {
                         Toast.makeText(this@SignUpActivity, "You are not authorised, Please contact to admin", Toast.LENGTH_LONG).show()
+                        progressbar.visibility = View.GONE
                     }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
                     Log.d(TAG, "onCancelled: ${error.message}")
+                    progressbar.visibility = View.GONE
                 }
             })
 
@@ -90,6 +95,7 @@ class SignUpActivity : AppCompatActivity() {
     private fun startSignUp() {
 
         val notificationRef = firebaseDatabase.getReference("notification")
+        val employeeRef = firebaseDatabase.getReference("employees")
 
         Firebase.messaging.subscribeToTopic(TOPIC).addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -126,22 +132,28 @@ class SignUpActivity : AppCompatActivity() {
                 notificationRef.child(employee.userId).setValue(employee).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Log.d(TAG, "DB: started")
-                        Toast.makeText(this@SignUpActivity, "Successful", Toast.LENGTH_SHORT).show()
+                        employeeRef.child(employee.userId).setValue(employee).addOnCompleteListener{ task ->
+                            if (task.isSuccessful){
+                                Toast.makeText(this@SignUpActivity, "Successful", Toast.LENGTH_SHORT).show()
 
-                        val intent = Intent(this@SignUpActivity, UserHomePageActivity::class.java)
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                        startActivity(intent)
+                                val intent = Intent(this@SignUpActivity, UserHomePageActivity::class.java)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                startActivity(intent)
+                            }
+                        }
 
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "createUserWithEmail:failure", task.exception)
                         Toast.makeText(this@SignUpActivity, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                        progressbar.visibility = View.GONE
 
                     }
                 }
 
             } else {
                 Toast.makeText(this@SignUpActivity, task.exception?.localizedMessage.toString(), Toast.LENGTH_SHORT).show()
+                progressbar.visibility = View.GONE
             }
 
         }
