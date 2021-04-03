@@ -153,15 +153,15 @@ public class UserHomePageActivity extends AppCompatActivity {
             }
         });
 
-        addEquipment.setOnClickListener(new View.OnClickListener() {
+       /* addEquipment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(UserHomePageActivity.this, CheckEquipmentActivity.class);
-               /* intent.putExtra("userInfo", employeeInfo);
-                intent.putExtra("userRole", userRole);*/
+               *//* intent.putExtra("userInfo", employeeInfo);
+                intent.putExtra("userRole", userRole);*//*
                 startActivity(intent);
             }
-        });
+        });*/
 
         executionReport.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,6 +204,13 @@ public class UserHomePageActivity extends AppCompatActivity {
 
         Intent intent = new Intent(UserHomePageActivity.this, UserDetailsActivity.class);
        // intent.putExtra("userInfo", employeeInfo);
+        startActivity(intent);
+    }
+
+    public void goToEquipmentActivity(View view) {
+        Intent intent = new Intent(UserHomePageActivity.this, CheckEquipmentActivity.class);
+               /* intent.putExtra("userInfo", employeeInfo);
+                intent.putExtra("userRole", userRole);*/
         startActivity(intent);
     }
 }
